@@ -30,8 +30,32 @@ OS name: "***", version: "***", arch: "***", family: "***"
 ## Installation
 
 1. Run `mvn install` to download all dependencies and install eRPC to local maven repository.
+2. Move to `erpc_java` and run `mvn install` to download all dependencies and build eRPC Java library.
+3. Output `erpc/erpc_java/target/erpc-0.1.0.jar`
+4. Move to `erpcgen` and run `make -f Makefile` to build `erpcgen tool`
+5. Output `erpc/Release/Darwin/erpcgen/erpcgen`
+5. Uses `erpcgen tool` to generate the shim code. Run `erpcgen -g java erpc_my_test.erpc`
 
 ## Usage
+
+### eRPC
+#### erpc_my_test.erpc
+````eRPC
+/*
+ * Copyright 2023 NXP
+ *
+ * SPDX-License-Identifier: BSD-3-Clause
+ */
+
+program erpc_my_test
+
+const int32 PORT = 40;
+const string HOST = "localhost";
+
+interface MyTest {
+    foo(in int32 a, in int32 b) -> int32
+}
+````
 
 ### Client
 
@@ -47,7 +71,6 @@ import com.example.app.client.MyTestClient;
 public class Main {
     public static void main(String[] args) {
         Transport transport = new TCPTransport("localhost", 40);
-        //Transport transport = new SerialTransport("COM4", 115200);
 
         ClientManager clientManager = new ClientManager(transport, new BasicCodecFactory());
         MyTestClient client = new MyTestClient(clientManager);
@@ -74,8 +97,7 @@ import com.example.app.MyTestService;
 
 public class Main {
     public static void main(String[] args) {
-        Transport transport = new TCPTransport("localhost", 40);
-        //Transport transport = new SerialTransport("COM4", 115200);
+        Transport transport = new TCPTransport(40);
 
         Server server = new SimpleServer(transport, new BasicCodecFactory());
 
@@ -95,11 +117,6 @@ public class MyTestService extends AbstractMyTestService {
     @Override
     public int foo(int a, int b) {
         return a + b;
-    }
-
-    @Override
-    public void boo(String in, Reference<String> out) {
-        out.set("Hello " + in);
     }
 }
 ```
