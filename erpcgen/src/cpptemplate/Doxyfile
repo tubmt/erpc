@@ -790,6 +790,7 @@ FILE_PATTERNS          = *.c \
                          *.cpp \
                          *.c++ \
                          *.java \
+                         *.dart \
                          *.ii \
                          *.ixx \
                          *.ipp \

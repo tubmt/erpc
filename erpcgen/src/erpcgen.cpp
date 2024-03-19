@@ -15,6 +15,7 @@
 #include "Logging.hpp"
 #include "PythonGenerator.hpp"
 #include "JavaGenerator.hpp"
+#include "DartGenerator.hpp"
 #include "SearchPath.hpp"
 #include "UniqueIdChecker.hpp"
 #include "options.hpp"
@@ -65,12 +66,13 @@ const char k_usageText[] =
   -I/--path <filePath>         Add search path for imports\n\
   -g/--generate <language>     Select the output language (default is C)\n\
   -c/--codec <codecType>       Specify used codec type\n\
-  -p/--package <packageName>   Java app package (com.example.app) (only for Java)\n\
+  -p/--package <packageName>   Java/Dart app package (com.example.app) (only for Java/Dart)\n\
 \n\
 Available languages (use with -g option):\n\
   c    C/C++\n\
   py   Python\n\
   java Java\n\
+  dart Dart\n\
 \n\
 Available codecs (use with --c option):\n\
   basic   BasicCodec\n\
@@ -103,6 +105,7 @@ protected:
         kCLanguage,
         kPythonLanguage,
         kJavaLanguage,
+        kDartLanguage,
     }; /*!< Generated outputs format. */
 
     typedef vector<string> string_vector_t; /*!< Vector of positional arguments. */
@@ -117,6 +120,7 @@ protected:
     languages_t m_outputLanguage;         /*!< Output language we're generating. */
     InterfaceDefinition::codec_t m_codec; /*!< Used codec type. */
     string m_javaPackageName;             /*!< Used java package. */
+    string m_dartPackageName;             /*!< Used dart package. */
 
 public:
     /*!
@@ -218,6 +222,10 @@ public:
                     {
                         m_outputLanguage = languages_t::kJavaLanguage;
                     }
+                    else if (lang == "dart")
+                    {
+                        m_outputLanguage = languages_t::kDartLanguage;
+                    }
                     else
                     {
                         Log::error("error: unknown language %s", lang.c_str());
@@ -244,6 +252,7 @@ public:
                 case 'p':
                 {
                     m_javaPackageName = optarg;
+                    m_dartPackageName = optarg;
                     break;
                 }
 
@@ -350,6 +359,12 @@ public:
                 {
                     // TODO: Check java package
                     JavaGenerator(&def, m_javaPackageName).generate();
+                    break;
+                }
+                case languages_t::kDartLanguage:
+                {
+                    // TODO: Check dart package
+                    DartGenerator(&def, m_dartPackageName).generate();
                     break;
                 }
             }

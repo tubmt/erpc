@@ -57,6 +57,7 @@ SOURCES += $(OBJS_ROOT)/erpcgen_parser.tab.cpp \
 			$(ERPC_ROOT)/erpcgen/src/CGenerator.cpp \
 			$(ERPC_ROOT)/erpcgen/src/PythonGenerator.cpp \
 			$(ERPC_ROOT)/erpcgen/src/JavaGenerator.cpp \
+			$(ERPC_ROOT)/erpcgen/src/DartGenerator.cpp \
 			$(ERPC_ROOT)/erpcgen/src/erpcgen.cpp \
 			$(ERPC_ROOT)/erpcgen/src/ErpcLexer.cpp \
 			$(ERPC_ROOT)/erpcgen/src/Generator.cpp \
@@ -99,6 +100,13 @@ SOURCES += $(OBJS_ROOT)/erpcgen_parser.tab.cpp \
             $(OBJS_ROOT)/erpcgen/src/templates/java_const.c \
             $(OBJS_ROOT)/erpcgen/src/templates/java_coders.c \
             $(OBJS_ROOT)/erpcgen/src/templates/java_client.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_struct.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_server.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_interface.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_enum.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_const.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_coders.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_client.c \
 
 SOURCES +=  $(OBJS_ROOT)/erpcgen/src/templates/c_common_header.c \
             $(OBJS_ROOT)/erpcgen/src/templates/cpp_interface_header.c \
@@ -128,6 +136,13 @@ SOURCES +=  $(OBJS_ROOT)/erpcgen/src/templates/c_common_header.c \
             $(OBJS_ROOT)/erpcgen/src/templates/java_const.c \
             $(OBJS_ROOT)/erpcgen/src/templates/java_coders.c \
             $(OBJS_ROOT)/erpcgen/src/templates/java_client.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_struct.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_server.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_interface.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_enum.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_const.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_coders.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_client.c \
 
 OBJECT_DEP := $(OBJS_ROOT)/erpcgen_lexer.cpp
 
