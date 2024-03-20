@@ -37,7 +37,7 @@ class {$iface.name}Client implements I{$iface.name} {
 {% for fn in iface.functions %}
 {$loop.addNewLineIfNotLast}
     @override
-    {$fn.prototype} {
+    {$fn.prototype} async {
         // Create request
         RequestContext request = _clientManager.createRequest({% if fn.isOneway %}true{% else %}false{% endif %});
         Codec codec = request.codec;
@@ -66,7 +66,7 @@ class {$iface.name}Client implements I{$iface.name} {
 {% endfor -- inParams %}
 
         // Perform request
-        _clientManager.performRequest(request);
+        await _clientManager.performRequest(request);
 
 {%  if not fn.isOneway %}
         // Read out parameters

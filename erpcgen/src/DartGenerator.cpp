@@ -365,7 +365,7 @@ string DartGenerator::getFunctionPrototype(Group *group, FunctionBase *fn, const
     DataType *dataTypeReturn = fn->getReturnType();
     string proto;
 
-    proto = getTypenameName(dataTypeReturn, false, false) + " ";
+    proto = "Future<" + getTypenameName(dataTypeReturn, false, false) + "> ";
     proto += getOutputName(function);
 
     bool isFirst = true;

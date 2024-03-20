@@ -91,7 +91,7 @@ class {$s.name}{
 {# create read-only properties for @length counts #}
 {% for m in s.members if m.lengthForMember %}
     int {$m.name}() {
-        return {$m.lengthForMember}.size();
+        return {$m.lengthForMember}.length;
     }
 
 {% endfor -- s.members %}

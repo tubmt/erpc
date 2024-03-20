@@ -46,9 +46,9 @@ abstract class Abstract{$iface.name}Service
     }
 
 {% for fn in iface.functions %}
-    void _{$fn.name}Handler(int sequence, Codec codec) {
+    void _{$fn.name}Handler(int sequence, Codec codec) async {
 {%          for p in fn.parameters if not p.serializedViaMember %}
-        {$p.call.type.typeName} {$p.name}{% if p.call.isReference %} = new Reference<>(){% endif%};
+        {$p.call.type.typeName} {$p.name}{% if p.call.isReference %} = new {$p.call.type.typeName}(){% endif%};
 {%          endfor %}
 
 {%          for p in fn.inParameters if not p.serializedViaMember %}
@@ -58,7 +58,7 @@ abstract class Abstract{$iface.name}Service
 {% set p.call.needTypeDeclaration = tmp %}
 {%          endfor %}
 
-        {%  if not fn.isOneway %}{% if fn.isReturnValue && fn.returnValue.type.type != "void" %}{$fn.returnValue.call.type.typeName} _result = {% endif %}{% endif %}{$fn.name}({% for p in fn.parameters if not p.serializedViaMember %}{$p.name}{% if !loop.last%}, {% endif %}{% endfor %});
+        {%  if not fn.isOneway %}{% if fn.isReturnValue && fn.returnValue.type.type != "void" %}{$fn.returnValue.call.type.typeName} _result = await {% endif %}{% endif %}{$fn.name}({% for p in fn.parameters if not p.serializedViaMember %}{$p.name}{% if !loop.last%}, {% endif %}{% endfor %});
 
         codec.reset();
 
