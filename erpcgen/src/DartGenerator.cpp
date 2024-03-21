@@ -1155,7 +1155,7 @@ string DartGenerator::getBuiltinCodecTypeName(const BuiltinType *t)
         case BuiltinType::builtin_type_t::kUInt32Type:
             return "UInt32";
         case BuiltinType::builtin_type_t::kUInt64Type:
-            throw internal_error("Dart implementation does not support uint64");
+            return "UInt64";
         case BuiltinType::builtin_type_t::kFloatType:
             return "Float";
         case BuiltinType::builtin_type_t::kDoubleType:
@@ -1190,7 +1190,7 @@ string DartGenerator::getBuiltinTypename(const BuiltinType *t)
         case BuiltinType::builtin_type_t::kUInt32Type:
             return "int";
         case BuiltinType::builtin_type_t::kUInt64Type:
-            throw internal_error("Dart implementation does not support uint64");
+            return "BigInt";
         case BuiltinType::builtin_type_t::kFloatType:
             return "double";
         case BuiltinType::builtin_type_t::kDoubleType:
@@ -1225,7 +1225,7 @@ string DartGenerator::getBuiltinObjectTypename(const BuiltinType *t)
         case BuiltinType::builtin_type_t::kUInt32Type:
             return "int";
         case BuiltinType::builtin_type_t::kUInt64Type:
-            throw internal_error("Dart implementation does not support uint64");
+            return "BigInt";
         case BuiltinType::builtin_type_t::kFloatType:
             return "double";
         case BuiltinType::builtin_type_t::kDoubleType:
