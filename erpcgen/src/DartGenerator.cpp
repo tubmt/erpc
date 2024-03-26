@@ -422,7 +422,7 @@ string DartGenerator::getTypenameName(DataType *t, bool isReference, bool object
         {
             ArrayType *a = dynamic_cast<ArrayType *>(t);
             assert(a);
-            returnName = getTypenameName(a->getElementType(), false, false) + "[]";
+            returnName = "List<" + getTypenameName(a->getElementType(), false, false) + ">";
             break;
         }
         case DataType::data_type_t::kBuiltinType:
@@ -498,7 +498,7 @@ string DartGenerator::getArrayInitialization(ArrayType *t)
 
     result = "new " + result;
 
-    return result;
+    return "[]";
 }
 
 void DartGenerator::makeConstTemplateData()

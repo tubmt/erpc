@@ -30,7 +30,7 @@
 for (int {$info.counter} = 0; {$info.counter} < {$info.size}; ++{$info.counter})
 {
 {$ addIndent("    ", info.protoNext.decode(info.protoNext))}
-    {$info.name}{% if info.isReference%}.get(){% endif %}[{$info.counter}] = {$info.protoNext.name};
+    {$info.name}{% if info.isReference%}.get(){% endif %}.add({$info.protoNext.name});
 }
 {% enddef ----------------------------------- ArrayType %}
 
