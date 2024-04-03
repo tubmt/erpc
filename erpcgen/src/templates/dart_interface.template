@@ -10,17 +10,17 @@
 
 {% if not empty(group.symbolsMap.structs) %}
 {% for s in group.symbolsMap.structs %}
-import '{$groupPackage}/common/structs/{$s.name}.dart';
+import '{$groupPackage}/common/structs/{$s.name}.g.dart';
 {%  endfor -- group.symbolsMap.structs %}
 {% elif not empty(structs)%}
 {% for s in structs %}
-import '{$groupPackage}/common/structs/{$s.name}.dart';
+import '{$groupPackage}/common/structs/{$s.name}.g.dart';
 {%  endfor -- structs %}
 {% endif %}
 
 {% if not empty(enums)%}
 {% for s in enums %}
-import '{$groupPackage}/common/enums/{$s.name}.dart';
+import '{$groupPackage}/common/enums/{$s.name}.g.dart';
 {%  endfor -- enums %}
 {% endif %}
 

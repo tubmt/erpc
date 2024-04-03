@@ -111,6 +111,11 @@ protected:
     void generateConstFile(std::string fileName);
 
     /*!
+     * @brief This function generate output export file.
+     */
+    void generateExportFile(std::string fileName);
+
+    /*!
      * @brief This function return interface function template data.
      *
      * This function return interface function template data with all data, which

@@ -107,6 +107,7 @@ SOURCES += $(OBJS_ROOT)/erpcgen_parser.tab.cpp \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_const.c \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_coders.c \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_client.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_export.c \
 
 SOURCES +=  $(OBJS_ROOT)/erpcgen/src/templates/c_common_header.c \
             $(OBJS_ROOT)/erpcgen/src/templates/cpp_interface_header.c \
@@ -143,6 +144,7 @@ SOURCES +=  $(OBJS_ROOT)/erpcgen/src/templates/c_common_header.c \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_const.c \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_coders.c \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_client.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/dart_export.c \
 
 OBJECT_DEP := $(OBJS_ROOT)/erpcgen_lexer.cpp
 

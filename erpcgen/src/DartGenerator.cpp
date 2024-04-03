@@ -29,6 +29,7 @@ extern const char *const kDartServer;
 extern const char *const kDartClient;
 extern const char *const kDartConst;
 extern const char *const kDartInterface;
+extern const char *const kDartExport;
 
 ////////////////////////////////////////////////////////////////////////////////
 // Code
@@ -57,6 +58,7 @@ void DartGenerator::generateOutputFiles(const string &fileName)
     generateClientFile(fileName);
     generateServerFile(fileName);
     generateInterfaceFile(fileName);
+    generateExportFile(fileName);
 }
 
 void DartGenerator::generateCommonFile(string fileName)
@@ -74,7 +76,7 @@ void DartGenerator::generateConstFile(string fileName)
     dir = m_outputDirectory / dir;
     filesystem::create_directories(dir);
 
-    std::string classFilename = fileName + "/Constants.dart";
+    std::string classFilename = fileName + "/Constants.g.dart";
     generateOutputFile(classFilename, "dart_const", m_templateData, kDartConst);
 }
 
@@ -92,7 +94,7 @@ void DartGenerator::generateClientFile(string fileName)
     {
         std::string name = interface.get().get()->getmap()["name"].get().get()->getvalue();
         m_templateData["interface"] = interface;
-        std::string classFilename = fileName + "/" + name + "Client.dart";
+        std::string classFilename = fileName + "/" + name + "Client.g.dart";
         generateOutputFile(classFilename, "dart_client", m_templateData, kDartClient);
     }
 }
@@ -111,7 +113,7 @@ void DartGenerator::generateServerFile(string fileName)
     {
         std::string name = interface.get().get()->getmap()["name"].get().get()->getvalue();
         m_templateData["interface"] = interface;
-        std::string classFilename = fileName + "/Abstract" + name + "Service.dart";
+        std::string classFilename = fileName + "/Abstract" + name + "Service.g.dart";
         generateOutputFile(classFilename, "dart_server", m_templateData, kDartServer);
     }
 }
@@ -130,7 +132,7 @@ void DartGenerator::generateInterfaceFile(string fileName)
     {
         std::string name = interface.get().get()->getmap()["name"].get().get()->getvalue();
         m_templateData["interface"] = interface;
-        std::string classFilename = fileName + "/I" + name + ".dart";
+        std::string classFilename = fileName + "/I" + name + ".g.dart";
         generateOutputFile(classFilename, "dart_interface", m_templateData, kDartInterface);
     }
 }
@@ -155,7 +157,7 @@ void erpcgen::DartGenerator::generateEnumFiles(std::string fileName)
         }
 
         m_templateData["enum"] = item;
-        std::string classFilename = fileName + "/" + name + ".dart";
+        std::string classFilename = fileName + "/" + name + ".g.dart";
         generateOutputFile(classFilename, "dart_enum", m_templateData, kDartEnum);
     }
 }
@@ -175,9 +177,19 @@ void erpcgen::DartGenerator::generateStructFiles(std::string fileName)
 
         m_templateData["struct"] = item;
         // dump_data(item);
-        std::string classFilename = fileName + "/" + name + ".dart";
+        std::string classFilename = fileName + "/" + name + ".g.dart";
         generateOutputFile(classFilename, "dart_struct", m_templateData, kDartStruct);
     }
+}
+
+void DartGenerator::generateExportFile(string fileName)
+{
+    filesystem::path dir(fileName);
+    dir = m_outputDirectory / dir;
+    filesystem::create_directories(dir);
+
+    std::string classFilename = fileName + "/" + fileName + ".g.dart";
+    generateOutputFile(classFilename, "dart_export", m_templateData, kDartExport);
 }
 
 void DartGenerator::parseSubtemplates()
