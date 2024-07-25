@@ -112,3 +112,4 @@ boost*/
 mingw.7z
 mingw64/
 vs_BuildTools*
+/.idea/

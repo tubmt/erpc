@@ -283,7 +283,9 @@ data_map DartGenerator::getFunctionTemplateData(Group *group, Function *fn)
                                                  fn->getReturnStructMemberType(), true, false);
     }
     // TODO support annotations on function return values
-    //    returnInfo["isNullable"] = (fn->getReturnType()->findAnnotation(NULLABLE_ANNOTATION) != nullptr);
+    StructMember *structMember = fn->getReturnStructMemberType();
+    bool isNullableVal = findAnnotation(structMember, NULLABLE_ANNOTATION) != nullptr;
+    returnInfo["isNullable"] = isNullableVal;
     info["returnValue"] = returnInfo;
 
     // get function parameter info
@@ -377,7 +379,9 @@ string DartGenerator::getFunctionPrototype(Group *group, FunctionBase *fn, const
     DataType *dataTypeReturn = fn->getReturnType();
     string proto;
 
-    proto = "Future<" + getTypenameName(dataTypeReturn, false, false) + "> ";
+    StructMember *structMember = fn->getReturnStructMemberType();
+    bool isNullable = findAnnotation(structMember, NULLABLE_ANNOTATION) != nullptr;
+    proto = "Future<" + getTypenameName(dataTypeReturn, false, false) + (isNullable ? "?" : "") + "> ";
     proto += getOutputName(function);
 
     bool isFirst = true;

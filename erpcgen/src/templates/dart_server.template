@@ -58,7 +58,7 @@ abstract class Abstract{$iface.name}Service
 {% set p.call.needTypeDeclaration = tmp %}
 {%          endfor %}
 
-        {%  if not fn.isOneway %}{% if fn.isReturnValue && fn.returnValue.type.type != "void" %}{$fn.returnValue.call.type.typeName} _result = await {% endif %}{% endif %}{$fn.name}({% for p in fn.parameters if not p.serializedViaMember %}{$p.name}{% if !loop.last%}, {% endif %}{% endfor %});
+        {%  if not fn.isOneway %}{% if fn.isReturnValue && fn.returnValue.type.type != "void" %}{$fn.returnValue.call.type.typeName}{% if fn.returnValue.isNullable %}?{% endif %} _result = await {% endif %}{% endif %}{$fn.name}({% for p in fn.parameters if not p.serializedViaMember %}{$p.name}{% if !loop.last%}, {% endif %}{% endfor %});
 
         codec.reset();
 
@@ -82,6 +82,9 @@ abstract class Abstract{$iface.name}Service
 {% endfor -- outParams %}
 {%      if fn.isReturnValue && fn.returnValue.type.type != "void" %}
         // Read return value
+{%      if fn.returnValue.isNullable %}
+        if (_result != null)
+{%      endif -- returnValue.isNullable %}
 {$      addIndent("        ",  fn.returnValue.call.encode(fn.returnValue.call))}
 {%      endif -- returnValue %}
 {%  endif -- oneway %}
