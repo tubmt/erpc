@@ -284,7 +284,7 @@ data_map DartGenerator::getFunctionTemplateData(Group *group, Function *fn)
     }
     // TODO support annotations on function return values
     StructMember *structMember = fn->getReturnStructMemberType();
-    bool isNullableVal = findAnnotation(structMember, NULLABLE_ANNOTATION) != nullptr;
+    bool isNullableVal = (findAnnotation(structMember, NULLABLE_ANNOTATION) != nullptr);
     returnInfo["isNullable"] = isNullableVal;
     info["returnValue"] = returnInfo;
 
@@ -303,7 +303,7 @@ data_map DartGenerator::getFunctionTemplateData(Group *group, Function *fn)
         paramInfo["type"] = getTypeInfo(paramType, false);
 
         bool isNullable = ((findAnnotation(param, NULLABLE_ANNOTATION) != nullptr) &&
-                           (trueDataType->isString() || (!trueDataType->isBuiltin() && !trueDataType->isEnum())));
+                           (trueDataType->isStruct() || trueDataType->isString() || (!trueDataType->isBuiltin() && !trueDataType->isEnum())));
         paramInfo["isNullable"] = isNullable;
 
         paramInfo["call"] = getEncodeDecodeCall(name, trueDataType, nullptr, false, false, param, false, true);
@@ -380,7 +380,7 @@ string DartGenerator::getFunctionPrototype(Group *group, FunctionBase *fn, const
     string proto;
 
     StructMember *structMember = fn->getReturnStructMemberType();
-    bool isNullable = findAnnotation(structMember, NULLABLE_ANNOTATION) != nullptr;
+    bool isNullable = (findAnnotation(structMember, NULLABLE_ANNOTATION) != nullptr);
     proto = "Future<" + getTypenameName(dataTypeReturn, false, false) + (isNullable ? "?" : "") + "> ";
     proto += getOutputName(function);
 
@@ -794,7 +794,7 @@ void DartGenerator::setOneStructMemberTemplateData(StructMember *member, data_ma
     // Info for declaring struct in common header
     member_info["name"] = memberName;
     bool isNullable = ((findAnnotation(member, NULLABLE_ANNOTATION) != nullptr) &&
-                       (trueDataType->isBinary() || trueDataType->isString() || trueDataType->isList()));
+                       (trueDataType->isStruct() || trueDataType->isBinary() || trueDataType->isString() || trueDataType->isList()));
     member_info["isNullable"] = isNullable;
     member_info["call"] =
         getEncodeDecodeCall(memberName, trueDataType, nullptr, true, true, member, needTempVariable, false);

@@ -88,7 +88,7 @@ class {$iface.name}Client implements I{$iface.name} {
 {$      addIndent("        ",  fn.returnValue.call.decode(fn.returnValue.call))}
         return {$fn.returnValue.call.name};
 {%      if fn.returnValue.isNullable %}
-        } catch (e) { debugPrint("Client -> read error=$e"); return null; }
+        } catch (e) { print("Client -> read error=$e"); return null; }
 {%      endif -- returnValue.isNullable %}
 {%      endif -- returnValue %}
 {%  endif -- oneway %}

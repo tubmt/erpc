@@ -79,8 +79,14 @@ public class {$iface.name}Client implements I{$iface.name} {
 {%      if fn.isReturnValue && fn.returnValue.type.type != "void" %}
 
         // Read return value
+{%      if fn.returnValue.isNullable %}
+        try {
+{%      endif -- returnValue.isNullable %}
 {$      addIndent("        ",  fn.returnValue.call.decode(fn.returnValue.call))}
         return {$fn.returnValue.call.name};
+{%      if fn.returnValue.isNullable %}
+        } catch (Exception e) { System.out.println("Client -> read error=" + e); return null; }
+{%      endif -- returnValue.isNullable %}
 {%      endif -- returnValue %}
 {%  endif -- oneway %}
     }
