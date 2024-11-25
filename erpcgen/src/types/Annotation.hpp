@@ -34,7 +34,8 @@ public:
         kC,
         kPython,
         kJava,
-        kDart
+        kDart,
+        kKotlin
     };
 
     /*!

@@ -624,6 +624,10 @@ Annotation::program_lang_t Generator::getAnnotationLang()
     {
         return Annotation::program_lang_t::kDart;
     }
+    else if (m_generatorType == generator_type_t::kKotlin)
+    {
+        return Annotation::program_lang_t::kKotlin;
+    }
 
     throw internal_error("Unsupported generator type specified for annotation.");
 }

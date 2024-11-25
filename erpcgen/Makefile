@@ -58,6 +58,7 @@ SOURCES += $(OBJS_ROOT)/erpcgen_parser.tab.cpp \
 			$(ERPC_ROOT)/erpcgen/src/PythonGenerator.cpp \
 			$(ERPC_ROOT)/erpcgen/src/JavaGenerator.cpp \
 			$(ERPC_ROOT)/erpcgen/src/DartGenerator.cpp \
+			$(ERPC_ROOT)/erpcgen/src/KotlinGenerator.cpp \
 			$(ERPC_ROOT)/erpcgen/src/erpcgen.cpp \
 			$(ERPC_ROOT)/erpcgen/src/ErpcLexer.cpp \
 			$(ERPC_ROOT)/erpcgen/src/Generator.cpp \
@@ -108,6 +109,13 @@ SOURCES += $(OBJS_ROOT)/erpcgen_parser.tab.cpp \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_coders.c \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_client.c \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_export.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_struct.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_server.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_interface.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_enum.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_const.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_coders.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_client.c \
 
 SOURCES +=  $(OBJS_ROOT)/erpcgen/src/templates/c_common_header.c \
             $(OBJS_ROOT)/erpcgen/src/templates/cpp_interface_header.c \
@@ -145,6 +153,13 @@ SOURCES +=  $(OBJS_ROOT)/erpcgen/src/templates/c_common_header.c \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_coders.c \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_client.c \
             $(OBJS_ROOT)/erpcgen/src/templates/dart_export.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_struct.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_server.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_interface.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_enum.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_const.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_coders.c \
+            $(OBJS_ROOT)/erpcgen/src/templates/kotlin_client.c \
 
 OBJECT_DEP := $(OBJS_ROOT)/erpcgen_lexer.cpp
 

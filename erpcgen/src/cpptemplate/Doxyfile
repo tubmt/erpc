@@ -791,6 +791,7 @@ FILE_PATTERNS          = *.c \
                          *.c++ \
                          *.java \
                          *.dart \
+                         *.kotlin \
                          *.ii \
                          *.ixx \
                          *.ipp \
