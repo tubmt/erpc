@@ -50,7 +50,8 @@ public:
         kC,
         kPython,
         kJava,
-        kDart
+        kDart,
+        kKotlin
     }; /*!< Type of generator. */
 
     typedef std::vector<DataType *> datatype_vector_t; /*!< Vector of data types. */

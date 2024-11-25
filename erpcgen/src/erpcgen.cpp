@@ -16,6 +16,7 @@
 #include "PythonGenerator.hpp"
 #include "JavaGenerator.hpp"
 #include "DartGenerator.hpp"
+#include "KotlinGenerator.hpp"
 #include "SearchPath.hpp"
 #include "UniqueIdChecker.hpp"
 #include "options.hpp"
@@ -66,13 +67,14 @@ const char k_usageText[] =
   -I/--path <filePath>         Add search path for imports\n\
   -g/--generate <language>     Select the output language (default is C)\n\
   -c/--codec <codecType>       Specify used codec type\n\
-  -p/--package <packageName>   Java/Dart app package (com.example.app) (only for Java/Dart)\n\
+  -p/--package <packageName>   Java/Dart/Kotlin app package (com.example.app) (only for Java/Dart/Kotlin)\n\
 \n\
 Available languages (use with -g option):\n\
-  c    C/C++\n\
-  py   Python\n\
-  java Java\n\
-  dart Dart\n\
+  c         C/C++\n\
+  py        Python\n\
+  java      Java\n\
+  dart      Dart\n\
+  kotlin    Kotlin\n\
 \n\
 Available codecs (use with --c option):\n\
   basic   BasicCodec\n\
@@ -106,6 +108,7 @@ protected:
         kPythonLanguage,
         kJavaLanguage,
         kDartLanguage,
+        kKotlinLanguage,
     }; /*!< Generated outputs format. */
 
     typedef vector<string> string_vector_t; /*!< Vector of positional arguments. */
@@ -121,6 +124,7 @@ protected:
     InterfaceDefinition::codec_t m_codec; /*!< Used codec type. */
     string m_javaPackageName;             /*!< Used java package. */
     string m_dartPackageName;             /*!< Used dart package. */
+    string m_kotlinPackageName;             /*!< Used kotlin package. */
 
 public:
     /*!
@@ -226,6 +230,10 @@ public:
                     {
                         m_outputLanguage = languages_t::kDartLanguage;
                     }
+                    else if (lang == "kotlin")
+                    {
+                        m_outputLanguage = languages_t::kKotlinLanguage;
+                    }
                     else
                     {
                         Log::error("error: unknown language %s", lang.c_str());
@@ -253,6 +261,7 @@ public:
                 {
                     m_javaPackageName = optarg;
                     m_dartPackageName = optarg;
+                    m_kotlinPackageName = optarg;
                     break;
                 }
 
@@ -365,6 +374,12 @@ public:
                 {
                     // TODO: Check dart package
                     DartGenerator(&def, m_dartPackageName).generate();
+                    break;
+                }
+                case languages_t::kKotlinLanguage:
+                {
+                    // TODO: Check kotlin package
+                    KotlinGenerator(&def, m_kotlinPackageName).generate();
                     break;
                 }
             }
